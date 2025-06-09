@@ -1,3 +1,51 @@
+# Sistema de Gerenciamento de Abrigos
+
+## Integrantes
+- Vinicius Murtinho Vicente - RM551151
+- Lucas Barreto Consentino - RM557107
+- Gustavo Bispo Cordeiro - RM558515
+
+## Apresentação do Projeto
+[Link para a apresentação do projeto](https://www.youtube.com/watch?v=-1yBofFZXvg)
+
+## Descrição da Solução
+
+O Sistema de Gerenciamento de Abrigos é uma aplicação mobile desenvolvida para facilitar o gerenciamento e coordenação de abrigos em situações de emergência. A solução permite:
+
+- Cadastro e gerenciamento de abrigos com informações detalhadas como localização, capacidade e status
+- Controle de ocupação e recursos disponíveis
+- Sistema de doações para arrecadação de recursos necessários
+- Avaliação dos abrigos pelos usuários
+- Gestão de necessidades específicas de cada abrigo
+- Interface intuitiva para visualização e edição de informações
+
+### Principais Funcionalidades
+
+1. **Gestão de Abrigos**
+   - Cadastro completo de abrigos com localização geográfica
+   - Monitoramento de capacidade e ocupação
+   - Status atualizado em tempo real
+
+2. **Sistema de Doações**
+   - Registro de doações recebidas
+   - Controle de recursos disponíveis
+   - Histórico de doações por abrigo
+
+3. **Avaliações e Feedback**
+   - Sistema de avaliação dos abrigos
+   - Comentários e feedback dos usuários
+   - Métricas de satisfação
+
+4. **Gestão de Necessidades**
+   - Registro de necessidades específicas
+   - Níveis de urgência
+   - Acompanhamento de recursos necessários
+
+5. **Usuários e Permissões**
+   - Diferentes níveis de acesso
+   - Gestão de usuários
+   - Controle de permissões
+
 # 🏠 Abrigo Hub
 
 Bem-vindo ao **Abrigo Hub**, um aplicativo móvel desenvolvido para conectar abrigos a pessoas em necessidade, gerenciamento de doações e informações essenciais. O objetivo é facilitar a comunicação e a coordenação de recursos em momentos críticos.
@@ -102,3 +150,110 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Documentação da API
+
+## Endpoints
+
+### Abrigos
+- `GET /api/Abrigos` - Lista todos os abrigos
+- `GET /api/Abrigos/{id}` - Obtém detalhes de um abrigo específico
+- `POST /api/Abrigos` - Cria um novo abrigo
+- `PUT /api/Abrigos/{id}` - Atualiza um abrigo existente
+- `DELETE /api/Abrigos/{id}` - Remove um abrigo
+- `GET /api/Abrigos/{id}/necessidades` - Lista as necessidades de um abrigo
+- `GET /api/Abrigos/{id}/recursos` - Lista os recursos de um abrigo
+
+### Usuários
+- `GET /api/Usuarios` - Lista todos os usuários
+- `POST /api/Usuarios` - Cria um novo usuário
+
+### Doações
+- `GET /api/Doacoes` - Lista todas as doações
+- `POST /api/Doacoes` - Registra uma nova doação
+
+### Avaliações
+- `GET /api/AbrigoAvaliacoes` - Lista todas as avaliações de abrigos
+- `POST /api/AbrigoAvaliacoes` - Cria uma nova avaliação para um abrigo
+
+### Necessidades
+- `GET /api/AbrigoNecessidades` - Lista todas as necessidades dos abrigos
+- `POST /api/AbrigoNecessidades` - Registra uma nova necessidade para um abrigo
+
+## Estrutura de Dados
+
+### Abrigo
+```typescript
+{
+  id: number;
+  nome: string;
+  descricao: string;
+  endereco: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  capacidade: number;
+  ocupacaoAtual: number;
+  status: string;
+  usuarioId: number;
+  latitude: number;
+  longitude: number;
+}
+```
+
+### Usuário
+```typescript
+{
+  id: number;
+  nome: string;
+  email: string;
+  tipoUsuario: string;
+  telefone: string;
+}
+```
+
+### Doação
+```typescript
+{
+  id: number;
+  nomeDoador: string;
+  tipoRecurso: string;
+  quantidade: number;
+  dataDoacao: string;
+  abrigoId: number;
+}
+```
+
+### Avaliação
+```typescript
+{
+  id: number;
+  nota: number;
+  comentario: string;
+  dataAvaliacao: string;
+  abrigoId: number;
+  usuarioId: number;
+}
+```
+
+### Necessidade
+```typescript
+{
+  tipoRecurso: string;
+  quantidade: number;
+  nivelUrgencia: string;
+  descricao: string;
+  abrigoId: number;
+}
+```
+
+### Recurso
+```typescript
+{
+  id: number;
+  tipoRecurso: string;
+  quantidade: number;
+  descricao: string;
+  abrigoId: number;
+}
+```
